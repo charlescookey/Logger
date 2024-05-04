@@ -1,0 +1,75 @@
+\chapter{Logger}
+\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e}{}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e}\index{Logger@{Logger}}
+\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md0}%
+
+\begin{DoxyItemize}
+\item \href{https://charlescookey.com/}{\texttt{ ME}}
+\end{DoxyItemize}\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Basic Logger.}{Basic Logger.}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md1}
+Task Description\+:
+
+Create a universal trace library for application event logging to different channels. The library should support logging to at least one of the following channels\+: TCP, serial, console, file, etc. Additionally, it should be designed in a non-\/blocking manner to ensure it does not impede the normal operation of the applications utilizing it.
+
+Requirements\+:
+
+
+\begin{DoxyEnumerate}
+\item Implement a C++ library that enables application event logging.
+\item The library should support logging to at least one of the following channels\+: TCP, serial, console, file, etc. You may choose the channel that best suits your expertise or demonstrate versatility by implementing logging to multiple channels.
+\item Ensure the library is non-\/blocking to prevent it from interfering with the normal execution of applications.
+\item Provide clear documentation on how to use the library and its different features.
+\item Optionally, you may include unit tests to ensure the reliability and robustness of your implementation.
+\end{DoxyEnumerate}\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{How to Use}{How to Use}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md2}
+This is a header-\/only library. Copy \href{Logger.h}{\texttt{ Logger.\+h}} file and {\ttfamily \#include} it in your project.\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{How to log}{How to log}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md3}
+Here is an example 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_logger_8h}{Logger.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ main()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ std::string\ a\ =\ \textcolor{stringliteral}{"{}string"{}};}
+\DoxyCodeLine{\ \ \ \ std::string\ str\ =\ \textcolor{stringliteral}{"{}Test\ Log\ with\ std::string"{}};}
+\DoxyCodeLine{\ \ \ \ std::string\ result;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Logger::Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{Logger::ConsoleChannel}}\ ,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{Logger::LogDebug}},\ \textcolor{stringliteral}{"{}Test\ Log\ with\ number\ \%d"{}}\ ,\ 5);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Logger::Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{Logger::ConsoleChannel}}\ ,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{Logger::LogInfo}},\ \textcolor{stringliteral}{"{}Test\ Log\ with\ c-\/string\ \%s\ ,\ \%i"{}}\ ,\ a.c\_str(),\ 15);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Logger::Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{Logger::ConsoleChannel}}\ ,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}{Logger::LogError}},\ str);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a162179ae3572ae9fb6932dfd58fc0421}{Logger::setFilepath}}(\textcolor{stringliteral}{"{}output.txt"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Logger::Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{Logger::FileChannel}}\ ,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{Logger::LogDebug}},\ str);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Logger::Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{Logger::FileChannel}},\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{Logger::LogInfo}},\ \textcolor{stringliteral}{"{}Test\ Log\ with\ c-\/string\ \%s\ ,\ \%i"{}}\ ,\ a.c\_str(),\ 15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ Output\+: \begin{quote}
+03-\/05-\/2024 \+: 11\+:46\+:30 \mbox{[}Debug\mbox{]} Test Log with number 5 03-\/05-\/2024 \+: 11\+:46\+:30 \mbox{[}Info\mbox{]} Test Log with c-\/string string , 15 03-\/05-\/2024 \+: 11\+:46\+:30 \mbox{[}Error\mbox{]} Test Log with std\+::string \end{quote}
+and file output
+
+\begin{quote}
+03-\/05-\/2024 \+: 11\+:46\+:30 \mbox{[}Debug\mbox{]} Test Log with std\+::string 03-\/05-\/2024 \+: 11\+:46\+:30 \mbox{[}Info\mbox{]} Test Log with c-\/string string , 15 \end{quote}
+\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{Ease if use}{Ease if use}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md4}
+No initialization, just use log functions\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Log Channels}{Log Channels}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md5}
+Theses are the channels currently supported 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{Logger::FileChannel}}}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{Logger::ConsoleChannel}}}
+
+\end{DoxyCode}
+\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{Log Orders}{Log Orders}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md6}
+Theses are the orders currently supported 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{Logger::LogDebug}}}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{Logger::LogInfo}}}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}{Logger::LogError}}}
+
+\end{DoxyCode}
+\hypertarget{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{File Output}{File Output}}\label{md__c_1_2_users_2charl_2_one_drive_2_documents_2_open_source_01_attempts_2_d_h_lo_2_answer_2_r_e_a_d_m_e_autotoc_md7}
+To set the file path file output, call 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_logger_a162179ae3572ae9fb6932dfd58fc0421}{Logger::setFilepath}}(\textcolor{stringliteral}{"{}output.txt"{}});}
+
+\end{DoxyCode}
+ if no file path is set the default file location is {\ttfamily "{}log.\+txt"{}}. 

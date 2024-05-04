@@ -1,0 +1,163 @@
+\doxysection{Logger.\+h}
+\hypertarget{_logger_8h_source}{}\label{_logger_8h_source}\index{C:/Users/charl/OneDrive/Documents/OpenSource Attempts/DHLo/Answer/Logger.h@{C:/Users/charl/OneDrive/Documents/OpenSource Attempts/DHLo/Answer/Logger.h}}
+\mbox{\hyperlink{_logger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{/*********************************************************************}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ @file\ \ Logger.h}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ @brief\ Implementation\ of\ the\ class\ Logger.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *********************************************************************/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//needed\ to\ use\ fopen\ if\ \ using\ visual\ studio}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ \_CRT\_SECURE\_NO\_WARNINGS}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_logger}{Logger}}\{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{LogChannel}}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{FileChannel}}\ ,\ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{ConsoleChannel}}}
+\DoxyCodeLine{00030\ \ \ \ \ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{LogOrder}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{LogDebug}},\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{LogInfo}}\ ,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}{LogError}}}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_logger_a162179ae3572ae9fb6932dfd58fc0421}{setFilepath}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ new\_filepath)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ getInstance().init(new\_filepath);}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{LogChannel}}\ channel,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{LogOrder}}\ order,\ std::string\ logMessage)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ getInstance().LOG(channel,\ order,\ logMessage.c\_str());}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_logger_a5744fa3cc8f6a91fc078201d9d590d9e}{Log}}(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{LogChannel}}\ channel,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{LogOrder}}\ order,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ logMessage,\ Args...\ args)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ getInstance().LOG(channel,\ order,\ logMessage,\ args...);}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ std::mutex\ logMutex;}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{char}\ \_time[80];}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ timestampFormat\ =\ \textcolor{stringliteral}{"{}\%d-\/\%m-\/\%Y\ :\ \%T"{}};}
+\DoxyCodeLine{00084\ \ \ \ \ std::FILE*\ file\ =\ 0;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ filepath\ =\ \textcolor{stringliteral}{"{}log.txt"{}};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{class_logger}{Logger}}()\ \{\}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{class_logger}{Logger}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_logger}{Logger}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{class_logger}{Logger}}\&\ operator=\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_logger}{Logger}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{class_logger}{\string~Logger}}()}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ deleteFile();}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_logger}{Logger}}\&\ getInstance()}
+\DoxyCodeLine{00098\ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_logger}{Logger}}\ instance;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ orderString(\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{LogOrder}}\ order)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (order\ ==\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{LogDebug}})\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}[Debug]\ \ \ \ \ "{}};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (order\ ==\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{LogInfo}})\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}[Info]\ \ \ \ \ \ "{}};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (order\ ==\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}{LogError}})\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}[Error]\ \ \ \ \ "{}};}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}[****]\ \ \ \ \ \ "{}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ init()\{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ deleteFile();}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ file\ =\ std::fopen(filepath,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\ ==\ 0)}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{bool}\ init(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ new\_filepath)\{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ deleteFile();}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ file\ =\ std::fopen(new\_filepath,\ \textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file\ ==\ 0)}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteFile()}
+\DoxyCodeLine{00154\ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file)}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ std::fclose(file);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ file\ =\ 0;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{void}\ fileLog(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ time,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ messageOrderStr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ logMessage,\ Args...\ args)\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (file)}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ std::fprintf(file,\ \textcolor{stringliteral}{"{}\%s\ \ \ \ "{}},\ time);}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ std::fprintf(file,\ messageOrderStr);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ std::fprintf(file,\ logMessage,\ args...);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ std::fprintf(file,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (getInstance().init())}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ getInstance().fileLog(time,\ messageOrderStr,\ logMessage,\ args...);}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{void}\ consoleLog(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ time,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ messageOrderStr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ logMessage,\ Args...\ args)\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ std::printf(\textcolor{stringliteral}{"{}\%s\ \ \ \ "{}},\ time);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ std::printf(messageOrderStr);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ std::printf(logMessage,\ args...);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ std::printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{void}\ LOG(\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{LogChannel}}\ channel,\ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{LogOrder}}\ order,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ message,\ Args...\ args)\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ std::time\_t\ current\_time\ =\ std::time(0);}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ std::tm*\ timestamp\ =\ std::localtime(\&current\_time);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ std::scoped\_lock\ lock(logMutex);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ std::strftime(\_time,\ 80,\ timestampFormat,\ timestamp);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (channel\ ==\ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{FileChannel}})\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ getInstance().fileLog(\_time,\ orderString(order),\ message,\ args...);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (channel\ ==\ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{ConsoleChannel}})\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ getInstance().consoleLog(\_time,\ orderString(order),\ message,\ args...);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+\DoxyCodeLine{00210\ \};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{comment}{//https://charlescookey.com/}}
+
+\end{DoxyCode}

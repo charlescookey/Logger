@@ -1,0 +1,129 @@
+\doxysection{Logger Class Reference}
+\hypertarget{class_logger}{}\label{class_logger}\index{Logger@{Logger}}
+
+
+{\ttfamily \#include $<$Logger.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Log\+Channel}} \{ \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}{File\+Channel}}
+, \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}{Console\+Channel}}
+ \}
+\item 
+enum \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Log\+Order}} \{ \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}{Log\+Debug}}
+, \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}{Log\+Info}}
+, \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}{Log\+Error}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_logger_a162179ae3572ae9fb6932dfd58fc0421}{set\+Filepath}} (const char \texorpdfstring{$\ast$}{*}new\+\_\+filepath)
+\item 
+static void \mbox{\hyperlink{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}{Log}} (\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Log\+Channel}} channel, \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Log\+Order}} order, std\+::string log\+Message)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\static void \mbox{\hyperlink{class_logger_a5744fa3cc8f6a91fc078201d9d590d9e}{Log}} (\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Log\+Channel}} channel, \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Log\+Order}} order, const char \texorpdfstring{$\ast$}{*}log\+Message, Args... args)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}\label{class_logger_ae8f51b545ed84d3fb3be61dea22f988d} 
+\index{Logger@{Logger}!LogChannel@{LogChannel}}
+\index{LogChannel@{LogChannel}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{LogChannel}{LogChannel}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Logger\+::\+Log\+Channel}}}
+
+The different channels currently supported. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FileChannel@{FileChannel}!Logger@{Logger}}\index{Logger@{Logger}!FileChannel@{FileChannel}}}\Hypertarget{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518}\label{class_logger_ae8f51b545ed84d3fb3be61dea22f988da2fb722bf0eb41e2dc417bfda19548518} 
+File\+Channel&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ConsoleChannel@{ConsoleChannel}!Logger@{Logger}}\index{Logger@{Logger}!ConsoleChannel@{ConsoleChannel}}}\Hypertarget{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1}\label{class_logger_ae8f51b545ed84d3fb3be61dea22f988dad525dfbf2181413fe3fbd8f03506a2f1} 
+Console\+Channel&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_logger_a8149051151052d0906111923bced4f4b}\label{class_logger_a8149051151052d0906111923bced4f4b} 
+\index{Logger@{Logger}!LogOrder@{LogOrder}}
+\index{LogOrder@{LogOrder}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{LogOrder}{LogOrder}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Logger\+::\+Log\+Order}}}
+
+The different orders currently supported. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LogDebug@{LogDebug}!Logger@{Logger}}\index{Logger@{Logger}!LogDebug@{LogDebug}}}\Hypertarget{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69}\label{class_logger_a8149051151052d0906111923bced4f4ba29fe8c99d1b8af5d4b270b1de42ffa69} 
+Log\+Debug&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LogInfo@{LogInfo}!Logger@{Logger}}\index{Logger@{Logger}!LogInfo@{LogInfo}}}\Hypertarget{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f}\label{class_logger_a8149051151052d0906111923bced4f4ba765bfdaff6eae25aee60f1b633ded99f} 
+Log\+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LogError@{LogError}!Logger@{Logger}}\index{Logger@{Logger}!LogError@{LogError}}}\Hypertarget{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1}\label{class_logger_a8149051151052d0906111923bced4f4ba59cbc4035a35a135ab7b1a2c1fd5e4c1} 
+Log\+Error&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_logger_a5744fa3cc8f6a91fc078201d9d590d9e}\label{class_logger_a5744fa3cc8f6a91fc078201d9d590d9e} 
+\index{Logger@{Logger}!Log@{Log}}
+\index{Log@{Log}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+static void Logger\+::\+Log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Log\+Channel}}}]{channel,  }\item[{\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Log\+Order}}}]{order,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{log\+Message,  }\item[{Args...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Writes the log messge for the specifiesd order to the specified channel .
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the channel to wwrite the log to, file or console \\
+\hline
+{\em Order} & the log order, debug, info, error \\
+\hline
+{\em log\+Message} & the message to be logged in c-\/string format \\
+\hline
+{\em args} & the arguments that can be passed into the c-\/string \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_logger_a85cc9d5a5ce4a357b2e00cef58268730}\label{class_logger_a85cc9d5a5ce4a357b2e00cef58268730} 
+\index{Logger@{Logger}!Log@{Log}}
+\index{Log@{Log}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void Logger\+::\+Log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_logger_ae8f51b545ed84d3fb3be61dea22f988d}{Log\+Channel}}}]{channel,  }\item[{\mbox{\hyperlink{class_logger_a8149051151052d0906111923bced4f4b}{Log\+Order}}}]{order,  }\item[{std\+::string}]{log\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Writes the log messge for the specifiesd order to the specified channel .
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & the channel to wwrite the log to, file or console \\
+\hline
+{\em Order} & the log order, debug, info, error \\
+\hline
+{\em log\+Message} & the message to be logged in string format \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_logger_a162179ae3572ae9fb6932dfd58fc0421}\label{class_logger_a162179ae3572ae9fb6932dfd58fc0421} 
+\index{Logger@{Logger}!setFilepath@{setFilepath}}
+\index{setFilepath@{setFilepath}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{setFilepath()}{setFilepath()}}
+{\footnotesize\ttfamily static bool Logger\+::set\+Filepath (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{new\+\_\+filepath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Set the file path and name to which the log output would be written.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+filepath} & the filepath \\
+\hline
+{\em micros} & the microseconds fraction\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the file exists or was created otherwise it returns false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/charl/\+One\+Drive/\+Documents/\+Open\+Source Attempts/\+DHLo/\+Answer/\mbox{\hyperlink{_logger_8h}{Logger.\+h}}\end{DoxyCompactItemize}
