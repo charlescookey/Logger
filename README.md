@@ -1,7 +1,7 @@
 # Logger
 * [MY PORTTFOLIO](https://charlescookey.com/)
 
-## Basic Logger.
+## Basic UniversalLogger.
 Task Description:
 
 Create a universal trace library for application event logging to different channels. The library should support logging to at least one of the following channels: TCP, serial, console, file, etc. Additionally, it should be designed in a non-blocking manner to ensure it does not impede the normal operation of the applications utilizing it.
